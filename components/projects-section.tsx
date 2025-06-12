@@ -1,25 +1,42 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Github, Calendar, Code } from "lucide-react"
+import { Github, Calendar, Code, AlertCircle, RefreshCw } from "lucide-react"
 import { useProjects } from "@/hooks/useProjects"
 
 export default function ProjectsSection() {
-  const { projects, loading, error } = useProjects()
+  const { projects, loading, error, refetch } = useProjects()
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center py-20">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sky-500"></div>
-      </div>
+      <section id="work" className="py-20 bg-gradient-to-b from-gray-900 to-black">
+        <div className="container px-4 mx-auto">
+          <div className="flex flex-col items-center justify-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sky-500 mb-4"></div>
+            <p className="text-gray-400">Loading projects...</p>
+          </div>
+        </div>
+      </section>
     )
   }
 
   if (error) {
     return (
-      <div className="text-center py-20">
-        <p className="text-red-400">Error loading projects: {error}</p>
-      </div>
+      <section id="work" className="py-20 bg-gradient-to-b from-gray-900 to-black">
+        <div className="container px-4 mx-auto">
+          <div className="text-center py-20">
+            <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
+            <p className="text-red-400 mb-4">Error loading projects: {error}</p>
+            <button
+              onClick={refetch}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg transition-colors"
+            >
+              <RefreshCw className="w-4 h-4" />
+              Retry
+            </button>
+          </div>
+        </div>
+      </section>
     )
   }
 
@@ -47,7 +64,8 @@ export default function ProjectsSection() {
 
           {projects.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-400">No projects found. Add some projects to see them here!</p>
+              <p className="text-gray-400 mb-4">No projects found.</p>
+              <p className="text-sm text-gray-500">Projects will appear here once they're added to the database.</p>
             </div>
           ) : (
             <div className="relative overflow-hidden">
@@ -64,12 +82,11 @@ export default function ProjectsSection() {
                 }}
               >
                 {/* Duplicate projects array for seamless loop */}
-                {projects.map((project, index) => (
+                {[...projects, ...projects].map((project, index) => (
                   <div key={`${project._id}-${index}`} className="w-80 flex-shrink-0">
                     <ProjectCard project={project} index={index} />
                   </div>
                 ))}
-
               </motion.div>
             </div>
           )}
