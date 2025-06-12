@@ -3,6 +3,19 @@
 import { useState, useEffect } from "react"
 import type { Project, ApiResponse } from "@/types/portfolio"
 
+// Fallback data in case API fails
+const fallbackProjects: Project[] = [
+  {
+    _id: "fallback-1",
+    name: "Portfolio Website",
+    year: "2024",
+    description: "A modern, responsive portfolio website built with Next.js and MongoDB.",
+    tools: ["Next.js", "React", "TypeScript", "MongoDB", "Tailwind CSS"],
+    githubLink: "https://github.com/sanjaywick",
+    featured: true,
+  },
+]
+
 export function useProjects() {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
@@ -12,17 +25,25 @@ export function useProjects() {
     try {
       setLoading(true)
       const response = await fetch("/api/projects")
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
       const result: ApiResponse<Project[]> = await response.json()
 
       if (result.success && result.data) {
         setProjects(result.data)
         setError(null)
       } else {
-        setError(result.error || "Failed to fetch projects")
+        console.warn("API returned no data, using fallback")
+        setProjects(fallbackProjects)
+        setError("Using fallback data - " + (result.error || "API returned no data"))
       }
     } catch (err) {
-      setError("Failed to fetch projects")
       console.error("Error fetching projects:", err)
+      setProjects(fallbackProjects)
+      setError("Failed to fetch from database, showing sample data")
     } finally {
       setLoading(false)
     }
