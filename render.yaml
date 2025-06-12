@@ -1,19 +1,21 @@
 services:
-  - type: web
-    name: sanjay-portfolio
-    env: node
-    plan: free
-    buildCommand: npm install--legacy-peer-deps && npm install mongodb --legacy-peer-deps && npm run build
-    startCommand: npm start
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: PORT
-        generateValue: true
-      - key: MONGODB_URI
-        sync: false
-      - key: EMAIL_USER
-        sync: false
-      - key: EMAIL_APP_PASSWORD
-        sync: false
-    healthCheckPath: /
+- type: web
+  name: next-js
+  runtime: node
+  plan: starter
+  buildCommand: yarn; yarn build
+  startCommand: yarn start
+  autoDeploy: false
+  envVars:
+  - key: NODE_ENV
+    value: production
+# Uncomment the following to deploy this app as a static site on render
+# - type: web
+#   name: nextjs-static
+#   runtime: static
+#   buildCommand: yarn; yarn build
+#   staticPublishPath: out
+#   pullRequestPreviewsEnabled: true     # optional
+#   envVars:
+#   - key: NODE_ENV
+#     value: production
