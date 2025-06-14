@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       console.log("Connecting to MongoDB...")
       const client = await clientPromise
-      const db = client.db("portfolio")
+      const db = client.db("Portfolio")
 
       console.log("Connected to database, fetching experiences...")
       const experiences = await db.collection<Experience>("experiences").find({}).sort({ createdAt: -1 }).toArray()
@@ -51,7 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       const client = await clientPromise
-      const db = client.db("portfolio")
+      const db = client.db("Portfolio")
 
       const experience: Omit<Experience, "_id"> = {
         role,
