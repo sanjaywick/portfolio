@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import clientPromise from "@/lib/mongodb"
-import type { Project } from "@/types/portfolio"
+import type { Project } from "@/lib/types"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
