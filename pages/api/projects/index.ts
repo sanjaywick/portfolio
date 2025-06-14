@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       console.log("Connecting to MongoDB...")
       const client = await clientPromise
-      const db = client.db("portfolio")
+      const db = client.db("Portfolio")
 
       console.log("Connected to database, fetching projects...")
       const projects = await db.collection<Project>("projects").find({}).sort({ createdAt: -1 }).toArray()
@@ -51,7 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       const client = await clientPromise
-      const db = client.db("portfolio")
+      const db = client.db("Portfolio")
 
       const project: Omit<Project, "_id"> = {
         name,
