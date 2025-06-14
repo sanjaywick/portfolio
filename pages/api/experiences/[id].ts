@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       const client = await clientPromise
-      const db = client.db("portfolio")
+      const db = client.db("Portfolio")
 
       const updateData = {
         ...(role && { role }),
@@ -56,7 +56,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       const client = await clientPromise
-      const db = client.db("portfolio")
+      const db = client.db("Portfolio")
 
       const result = await db.collection("experiences").deleteOne({
         _id: new ObjectId(id),
