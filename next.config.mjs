@@ -3,9 +3,6 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['mongodb']
   },
-  env: {
-    CUSTOM_KEY: process.env.CUSTOM_KEY,
-  },
   eslint: {
     ignoreDuringBuilds: true,
   },
