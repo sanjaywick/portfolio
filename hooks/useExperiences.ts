@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import type { Experience, ApiResponse } from "@/types/portfolio"
+import type { Experience, ApiResponse } from "@/lib/types"
 
 export function useExperiences() {
   const [experiences, setExperiences] = useState<Experience[]>([])
