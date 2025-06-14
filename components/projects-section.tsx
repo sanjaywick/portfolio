@@ -90,7 +90,7 @@ export default function ProjectsSection() {
                   },
                 }}
               >
-                {[...projects, ...projects].map((project, index) => (
+                {[...projects].map((project, index) => (
                   <div key={`${project._id}-${index}`} className="w-80 flex-shrink-0">
                     <ProjectCard project={project} index={index} />
                   </div>
