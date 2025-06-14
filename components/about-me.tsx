@@ -394,20 +394,55 @@ function SkillBar({ name, proficiency }) {
   )
 }
 
-function ProfessionalExperienceInAbout() {
-  const { experiences, loading: experiencesLoading, error: experiencesError } = useExperiences()
 
-  // Only get professional experiences from database
+
+import { useEffect, useState } from "react"
+interface Experience {
+  _id: string
+  role: string
+  organization: string
+  startDate: string
+  endDate?: string
+  location: string
+  type: string
+  achievements: string[]
+  tools?: string[]
+  featured?: boolean
+}
+
+function ProfessionalExperienceInAbout() {
+  const [experiences, setExperiences] = useState<Experience[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchExperiences = async () => {
+      try {
+        const response = await fetch("/api/experiences")
+        if (!response.ok) throw new Error("Failed to fetch")
+        const data = await response.json()
+        setExperiences(data)
+      } catch (err: any) {
+        console.error("Error fetching experiences:", err)
+        setError(err.message || "Unknown error")
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchExperiences()
+  }, [])
+
   const experienceData = experiences.filter(
     (exp) =>
       exp.type === "internship" ||
       exp.type === "full-time" ||
       exp.type === "part-time" ||
       exp.type === "contract" ||
-      exp.type === "freelance",
+      exp.type === "freelance"
   )
 
-  if (experiencesLoading) {
+  if (loading) {
     return (
       <div className="flex justify-center items-center py-10 mb-20">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-500"></div>
@@ -415,10 +450,10 @@ function ProfessionalExperienceInAbout() {
     )
   }
 
-  if (experiencesError) {
+  if (error) {
     return (
       <div className="text-center py-10 mb-20">
-        <p className="text-red-400">Error loading experiences: {experiencesError}</p>
+        <p className="text-red-400">Error loading experiences: {error}</p>
       </div>
     )
   }
@@ -448,7 +483,6 @@ function ProfessionalExperienceInAbout() {
         <span className="ml-2 text-white">💼</span>
       </motion.h3>
 
-      {/* Experience Cards */}
       <div className="space-y-8">
         {experienceData.map((item, index) => (
           <motion.div
@@ -489,7 +523,6 @@ function ProfessionalExperienceInAbout() {
                 </div>
               </div>
 
-              {/* Achievements */}
               <div className="mt-6 bg-gray-900/50 p-4 rounded-lg border border-sky-500/20">
                 <h5 className="text-sm font-semibold text-cyan-400 mb-3 flex items-center gap-2">
                   <TrendingUp className="w-4 h-4" />
@@ -505,7 +538,6 @@ function ProfessionalExperienceInAbout() {
                 </ul>
               </div>
 
-              {/* Tools */}
               {item.tools && item.tools.length > 0 && (
                 <div className="flex flex-wrap justify-center md:justify-start gap-2 mt-4">
                   {item.tools.map((tool, toolIndex) => (
@@ -519,7 +551,6 @@ function ProfessionalExperienceInAbout() {
                 </div>
               )}
 
-              {/* Featured badge */}
               {item.featured && (
                 <div className="absolute top-4 right-4">
                   <span className="px-2 py-1 text-xs rounded-full bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-300 border border-yellow-500/30">

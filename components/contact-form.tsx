@@ -1,118 +1,96 @@
 "use client"
 
-import { useState, useTransition } from "react"
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { submitContactForm } from "@/app/actions/contact"
-import { CheckCircle, AlertCircle, Send } from "lucide-react"
+import { MessageSquare, Smartphone, Mail, ExternalLink } from "lucide-react"
 
 export default function ContactForm() {
-  const [isPending, startTransition] = useTransition()
-  const [result, setResult] = useState<{ success: boolean; message?: string; error?: string } | null>(null)
-
-  const handleSubmit = async (formData: FormData) => {
-    startTransition(async () => {
-      const response = await submitContactForm(formData)
-      setResult(response)
-
-      // Clear the form if successful
-      if (response.success) {
-        const form = document.getElementById("contact-form") as HTMLFormElement
-        if (form) {
-          form.reset()
-        }
-      }
-    })
-  }
-
   return (
-    <div>
-      <form id="contact-form" action={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">
-            Name *
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            disabled={isPending}
-            className="w-full rounded-md bg-gray-800 border border-gray-700 text-white px-4 py-3 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            placeholder="Your full name"
-          />
+    <motion.div
+      className="max-w-3xl mx-auto"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+      viewport={{ once: true }}
+    >
+      <div className="bg-gray-900 p-8 rounded-lg border border-gray-800 hover:border-sky-500/50 transition-all duration-300">
+        <div className="text-center mb-8">
+          <h3 className="text-2xl font-bold text-white mb-4">Let's Connect!</h3>
+          <p className="text-gray-400">
+            Ready to collaborate or have a question? Reach out through any of these channels:
+          </p>
         </div>
 
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">
-            Email *
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            disabled={isPending}
-            className="w-full rounded-md bg-gray-800 border border-gray-700 text-white px-4 py-3 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            placeholder="your.email@example.com"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">
-            Message *
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows={5}
-            required
-            disabled={isPending}
-            className="w-full rounded-md bg-gray-800 border border-gray-700 text-white px-4 py-3 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed resize-vertical"
-            placeholder="Tell me about your project or just say hello..."
-          />
-        </div>
-
-        <Button
-          type="submit"
-          disabled={isPending}
-          className="w-full bg-gradient-to-r from-sky-500 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 transform hover:scale-105 transition-all duration-300 disabled:transform-none disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isPending ? (
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              Sending...
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Email */}
+          <motion.a
+            href="mailto:vvsanjay10102003@gmail.com"
+            className="group p-6 bg-gray-800 rounded-lg border border-gray-700 hover:border-sky-500 transition-all duration-300 text-center"
+            whileHover={{ scale: 1.05, y: -5 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <div className="w-12 h-12 bg-gradient-to-r from-sky-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg group-hover:shadow-sky-500/25 transition-all duration-300">
+              <Mail className="w-6 h-6 text-white" />
             </div>
-          ) : (
-            <div className="flex items-center gap-2">
-              <Send className="w-4 h-4" />
-              Send Message
+            <h4 className="text-lg font-semibold text-white mb-2">Email</h4>
+            <p className="text-gray-400 text-sm mb-3">Send me a message</p>
+            <div className="flex items-center justify-center gap-2 text-sky-400 group-hover:text-sky-300 transition-colors">
+              <span className="text-sm">vvsanjay10102003@gmail.com</span>
+              <ExternalLink className="w-4 h-4" />
             </div>
-          )}
-        </Button>
-      </form>
+          </motion.a>
 
-      {/* Result Message */}
-      {result && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={`mt-4 p-4 rounded-lg border ${
-            result.success
-              ? "bg-green-500/10 border-green-500/30 text-green-400"
-              : "bg-red-500/10 border-red-500/30 text-red-400"
-          }`}
-        >
-          <div className="flex items-center gap-2">
-            {result.success ? (
-              <CheckCircle className="w-5 h-5 flex-shrink-0" />
-            ) : (
-              <AlertCircle className="w-5 h-5 flex-shrink-0" />
-            )}
-            <p className="text-sm">{result.success ? result.message : result.error}</p>
-          </div>
-        </motion.div>
-      )}
-    </div>
+          {/* Phone */}
+          <motion.a
+            href="tel:+919025357750"
+            className="group p-6 bg-gray-800 rounded-lg border border-gray-700 hover:border-cyan-500 transition-all duration-300 text-center"
+            whileHover={{ scale: 1.05, y: -5 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg group-hover:shadow-cyan-500/25 transition-all duration-300">
+              <Smartphone className="w-6 h-6 text-white" />
+            </div>
+            <h4 className="text-lg font-semibold text-white mb-2">Phone</h4>
+            <p className="text-gray-400 text-sm mb-3">Give me a call</p>
+            <div className="flex items-center justify-center gap-2 text-cyan-400 group-hover:text-cyan-300 transition-colors">
+              <span className="text-sm">+91 90253 57750</span>
+              <ExternalLink className="w-4 h-4" />
+            </div>
+          </motion.a>
+
+          {/* WhatsApp */}
+          <motion.a
+            href="https://wa.me/919025357750"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group p-6 bg-gray-800 rounded-lg border border-gray-700 hover:border-green-500 transition-all duration-300 text-center"
+            whileHover={{ scale: 1.05, y: -5 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg group-hover:shadow-green-500/25 transition-all duration-300">
+              <MessageSquare className="w-6 h-6 text-white" />
+            </div>
+            <h4 className="text-lg font-semibold text-white mb-2">WhatsApp</h4>
+            <p className="text-gray-400 text-sm mb-3">Quick chat</p>
+            <div className="flex items-center justify-center gap-2 text-green-400 group-hover:text-green-300 transition-colors">
+              <span className="text-sm">Message me</span>
+              <ExternalLink className="w-4 h-4" />
+            </div>
+          </motion.a>
+        </div>
+
+        <div className="mt-8 text-center">
+          <motion.div
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-500/10 to-cyan-500/10 rounded-full border border-sky-500/20"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="text-sm text-gray-300">Available for new opportunities</span>
+          </motion.div>
+        </div>
+      </div>
+    </motion.div>
   )
 }

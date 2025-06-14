@@ -1,40 +1,26 @@
-import { MongoClient } from "mongodb"
+import { MongoClient, type Db } from "mongodb"
 
-if (!process.env.MONGODB_URI) {
-  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
-}
+let cachedClient: MongoClient | null = null
+let cachedDb: Db | null = null
 
-const uri = process.env.MONGODB_URI
-const options = {}
-
-let client
-let clientPromise: Promise<MongoClient>
-
-if (process.env.NODE_ENV === "development") {
-  // In development mode, use a global variable so that the value
-  // is preserved across module reloads caused by HMR (Hot Module Replacement).
-  const globalWithMongo = global as typeof globalThis & {
-    _mongoClientPromise?: Promise<MongoClient>
+export async function connectToDatabase() {
+  // If we already have a connection, use it
+  if (cachedClient && cachedDb) {
+    return { client: cachedClient, db: cachedDb }
   }
 
-  if (!globalWithMongo._mongoClientPromise) {
-    client = new MongoClient(uri, options)
-    globalWithMongo._mongoClientPromise = client.connect()
-  }
-  clientPromise = globalWithMongo._mongoClientPromise
-} else {
-  // In production mode, it's best to not use a global variable.
-  client = new MongoClient(uri, options)
-  clientPromise = client.connect()
+  // If no connection, create a new one
+  // In a real application, you would use an environment variable for the connection string
+  const uri = process.env.MONGODB_URI 
+
+
+  const client = new MongoClient(uri)
+  await client.connect()
+  const db = client.db("Portfolio")
+
+  // Cache the client and db connection
+  cachedClient = client
+  cachedDb = db
+
+  return { client, db }
 }
-
-// Add debugging
-clientPromise
-  .then(() => {
-    console.log("MongoDB connected successfully")
-  })
-  .catch((error) => {
-    console.error("MongoDB connection error:", error)
-  })
-
-export default clientPromise

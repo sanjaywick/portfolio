@@ -16,7 +16,7 @@ import InteractiveShapes from "@/components/InteractiveShapes"
 import AnimatedBoxes from "@/components/AnimatedBoxes"
 import AnimatedBackground from "@/components/animated-background"
 import ProjectsSection from "@/components/projects-section"
-
+import ContactForm from "@/components/contact-form"
 export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -93,7 +93,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.5 }}
               style={{ y: subtitleY }}
             >
-              💻 Full-Stack Developer | 🎯 Decision Sciences Student | 🚀 Tech Innovator
+              💻 Full-Stack Developer | 🚀 Tech Innovator
             </motion.h2>
             <motion.div
               className="flex flex-wrap justify-center gap-4"
@@ -107,14 +107,15 @@ export default function Home() {
                   View Projects
                 </Button>
               </ScrollLink>
-              <ScrollLink to="contact" smooth={true} duration={500}>
-                <Button
-                  variant="outline"
-                  className="bg-transparent border-2 border-sky-500 text-white hover:bg-sky-500 hover:text-white transition-all duration-300 transform hover:scale-105"
-                >
-                  Contact Me
-                </Button>
-              </ScrollLink>
+            <a href="/sanjay.pdf" download>
+              <Button
+                variant="outline"
+                className="bg-transparent border-2 border-sky-500 text-white hover:bg-sky-500 hover:text-white transition-all duration-300 transform hover:scale-105"
+              >
+                Download Resume
+              </Button>
+            </a>
+          
             </motion.div>
           </motion.div>
         </motion.div>
@@ -234,100 +235,32 @@ export default function Home() {
       {/* Projects Section */}
       <ProjectsSection />
 
-      {/* Contact Section with Enhanced Form */}
-      <section id="contact" className="py-20 bg-black">
-        <div className="container px-4 mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <motion.h2
-              className="text-3xl md:text-4xl font-bold mb-12 text-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+             {/* Contact Section with Enhanced Form */}
+        <section id="contact" className="py-20 bg-black">
+          <div className="container px-4 mx-auto">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-cyan-500">
-                Let's Connect
-              </span>
-              <span className="ml-2 text-white">🚀</span>
-            </motion.h2>
-            <motion.div
-              className="max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="bg-gray-900 p-6 rounded-lg border border-gray-800 hover:border-sky-500/50 transition-all duration-300">
-                <form className="space-y-4" onSubmit={handleSubmit}>
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-400">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white px-4 py-3 focus:border-sky-500 focus:ring-sky-500 transition-colors duration-300"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-400">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white px-4 py-3 focus:border-sky-500 focus:ring-sky-500 transition-colors duration-300"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-400">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white px-4 py-3 focus:border-sky-500 focus:ring-sky-500 transition-colors duration-300"
-                    ></textarea>
-                  </div>
-                  <Button
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-sky-500 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 transform hover:scale-105 transition-all duration-300"
-                  >
-                    Send Message
-                  </Button>
-                </form>
-                <div className="mt-6 text-center">
-                  <p className="text-gray-400 mb-4">Get in touch through:</p>
-                  <div className="flex flex-col sm:flex-row justify-center gap-4">
-                    <a
-                      href="mailto:vvsanjay8416@gmail.com"
-                      className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-sky-600 hover:bg-sky-700 transform hover:scale-105 transition-all duration-300"
-                    >
-                      <MessageSquare className="mr-2 h-4 w-4" />
-                      Email Me
-                    </a>
-                    <a
-                      href="tel:+919025357750"
-                      className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 transform hover:scale-105 transition-all duration-300"
-                    >
-                      <Smartphone className="mr-2 h-4 w-4" />
-                      Call Me
-                    </a>
-                  </div>
-                </div>
-              </div>
+              <motion.h2
+                className="text-3xl md:text-4xl font-bold mb-12 text-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-cyan-500">
+                  Let's Connect
+                </span>
+                <span className="ml-2 text-white">🚀</span>
+              </motion.h2>
+              <ContactForm />
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
+
 
       {/* Footer with Enhanced Social Links */}
       <footer className="py-12 bg-gradient-to-t from-gray-900 to-black">
@@ -367,7 +300,7 @@ function ContactEmail() {
         href="mailto:vvsanjay8416@gmail.com"
         className="text-sky-400 hover:text-sky-300 transition-colors duration-300"
       >
-        vvsanjay8416@gmail.com
+        vvsanjay10102003@gmail.com
       </a>
     </div>
   )
