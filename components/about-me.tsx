@@ -147,9 +147,32 @@ export default function AboutMe() {
                     transition={{ duration: 0.8, delay: 0.5 }}
                     viewport={{ once: true }}
                   >
-                    An <strong>aspiring Full-Stack Developer 💻</strong> and Decision Sciences student 🎯 with a passion for creating innovative digital solutions...
+                    An <strong>aspiring Full-Stack Developer 💻</strong> and{" "}
+                    Decision Sciences student 🎯with a passion for creating innovative digital
+                    solutions. I specialize in <strong>modern web technologies</strong> like{" "}
+                    <strong>Next.js, React, and TypeScript</strong>, bringing ideas to life through code.
                   </motion.p>
-                  {/* ...rest remains unchanged */}
+                  <motion.p
+                    className="mb-4"
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.6 }}
+                    viewport={{ once: true }}
+                  >
+                    My journey spans from <strong>heading Internal Affaris division</strong> to <strong>becoming Internship Coordinator </strong>{" "}
+                    . I love turning complex problems into elegant,
+                    user-friendly solutions. When I'm not coding, you'll find me exploring new technologies, mentoring
+                    fellow students, or working on exciting projects that push the boundaries of what's possible.
+                  </motion.p>
+                  <motion.p
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.7 }}
+                    viewport={{ once: true }}
+                  >
+                    Let's <strong>connect and build something amazing together!</strong> The future is digital, and I'm
+                    here to shape it. ⚡🔥
+                  </motion.p>
                 </div>
               </div>
             </div>
