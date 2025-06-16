@@ -109,74 +109,85 @@ export default function AboutMe() {
           </motion.h2>
 
           {/* Profile Section */}
-          <motion.div
-            className="flex flex-col items-center justify-center text-center gap-8 mb-16"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <div className="md:w-2/3">
-              <div className="prose prose-invert max-w-none text-center">
-                {/* Mobile description */}
-                <motion.p
-                  className="text-lg leading-relaxed md:hidden"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  viewport={{ once: true }}
-                >
-                  Aspiring Full-Stack Developer 💻 with expertise in modern web technologies. Passionate about creating
-                  innovative digital solutions and learning cutting-edge technologies. 🚀✨
-                </motion.p>
-                {/* Desktop description */}
-                <div className="hidden md:block">
-                  <motion.p
-                    className="text-xl mb-4"
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    viewport={{ once: true }}
-                  >
-                    🚀 <strong>Hey, I'm Sanjay V V!</strong>
-                  </motion.p>
-                  <motion.p
-                    className="mb-4"
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                    viewport={{ once: true }}
-                  >
-                    An <strong>aspiring Full-Stack Developer 💻</strong> and{" "}
-                    Decision Sciences student 🎯with a passion for creating innovative digital
-                    solutions. I specialize in <strong>modern web technologies</strong> like{" "}
-                    <strong>Next.js, React, and TypeScript</strong>, bringing ideas to life through code.
-                  </motion.p>
-                  <motion.p
-                    className="mb-4"
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 0.6 }}
-                    viewport={{ once: true }}
-                  >
-                    My journey spans from <strong>heading Internal Affaris division</strong> to <strong>becoming Internship Coordinator </strong>{" "}
-                    . I love turning complex problems into elegant,
-                    user-friendly solutions. When I'm not coding, you'll find me exploring new technologies, mentoring
-                    fellow students, or working on exciting projects that push the boundaries of what's possible.
-                  </motion.p>
-                  <motion.p
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: 0.7 }}
-                    viewport={{ once: true }}
-                  >
-                    Let's <strong>connect and build something amazing together!</strong> The future is digital, and I'm
-                    here to shape it. ⚡🔥
-                  </motion.p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+<motion.div
+  className="flex flex-col items-center justify-center text-center gap-8 mb-16"
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.2 }}
+  viewport={{ once: true }}
+>
+  <div className="md:w-2/3">
+    <div className="prose prose-invert max-w-none text-center">
+      {/* Mobile description */}
+      <motion.p
+        className="text-lg leading-relaxed md:hidden"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        viewport={{ once: true }}
+      >
+        Aspiring Full-Stack Developer 💻 with expertise in modern web
+        technologies. Passionate about creating innovative digital
+        solutions and learning cutting-edge technologies. 🚀✨
+      </motion.p>
+
+      {/* Desktop description */}
+      <div className="hidden md:block">
+        <motion.p
+          className="text-xl mb-4"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          🚀 <strong>Hey, I'm Sanjay V V!</strong>
+        </motion.p>
+
+        <motion.p
+          className="mb-4"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          viewport={{ once: true }}
+        >
+          An <strong>aspiring Full-Stack Developer 💻</strong> and{" "}
+          Decision Sciences student 🎯 with a passion for creating
+          innovative digital solutions. I specialize in{" "}
+          <strong>modern web technologies</strong> like{" "}
+          <strong>Next.js, React, and TypeScript</strong>, bringing
+          ideas to life through code.
+        </motion.p>
+
+        <motion.p
+          className="mb-4"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          viewport={{ once: true }}
+        >
+          My journey spans from{" "}
+          <strong>heading Internal Affairs division</strong> to{" "}
+          <strong>becoming Internship Coordinator</strong>. I love
+          turning complex problems into elegant, user-friendly
+          solutions. When I'm not coding, you'll find me exploring new
+          technologies, mentoring fellow students, or working on
+          exciting projects that push the boundaries of what's
+          possible.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          viewport={{ once: true }}
+        >
+          Let's <strong>connect and build something amazing together!</strong> The future is digital, and I'm
+          here to shape it. ⚡🔥
+        </motion.p>
+      </div>
+    </div>
+  </div>
+</motion.div>
 
 
           {/* Education Section */}
