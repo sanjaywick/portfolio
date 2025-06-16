@@ -116,20 +116,6 @@ export default function AboutMe() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="md:w-1/3">
-              <motion.div
-                className="relative w-64 h-64 mx-auto"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Image
-                  src="/placeholder.svg?height=256&width=256"
-                  alt="Sanjay V V"
-                  fill
-                  className="rounded-lg object-cover shadow-lg border-2 border-sky-500/20"
-                />
-              </motion.div>
-            </div>
             <div className="md:w-2/3">
               <div className="prose prose-invert max-w-none text-center md:text-left">
                 {/* Mobile description */}
